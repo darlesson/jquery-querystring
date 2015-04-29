@@ -12,7 +12,7 @@ Download the files and add the following to your website
     <script type="text/javascript" src="javascript/jquery-1.4.2.min.js"></script>
 
     // Insert the source file
-    <script type="text/javascript" src="source/querystring-1.1.0.js"></script>
+    <script type="text/javascript" src="source/querystring-1.1.1.js"></script>
 ```
 
 ## Usage ##

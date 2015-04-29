@@ -1,5 +1,5 @@
 /*!
- * jQuery QueryString v1.1.0 (Release version)
+ * jQuery QueryString v1.1.1 (Release version)
  *
  * http://www.darlesson.com/
  *
@@ -59,51 +59,54 @@
                 multipleAsArray = options.multipleAsArray,
                 href = options.href.toString(),
                 queryString = (href.lastIndexOf("?") > -1) ? href.substring(href.lastIndexOf("?") + 1, href.length) : null,
-                items = [],
-                indexOfHash = queryString.lastIndexOf('#');
+                items = [];
 
-            // Remove hash from the return
-            if (indexOfHash)
-                queryString = queryString.substring(0, indexOfHash);
+            if (queryString) {
 
-            if (queryString)
-                items = queryString.split('&');
+                var indexOfHash = queryString.lastIndexOf('#');
 
-            if (items.length) {
+                // Remove hash from the return
+                if (indexOfHash > -1)
+                    queryString = queryString.substring(0, indexOfHash);
 
-                var i = -1,
-                    item = '',
-                    indexOfEqual = -1,
-                    hasOwnProperty = false,
-                    key,
-                    value;
-                while (i++ && i < items.length || i < items.length) {
+                if (queryString)
+                    items = queryString.split('&');
 
-                    item = items[i];
+                if (items.length) {
 
-                    indexOfEqual = item.indexOf('=');
+                    var i = -1,
+                        item = '',
+                        indexOfEqual = -1,
+                        hasOwnProperty = false,
+                        key,
+                        value;
+                    while (i++ && i < items.length || i < items.length) {
 
-                    if (indexOfEqual > 0) {
+                        item = items[i];
 
-                        key = item.substring(0, indexOfEqual);
-                        value = item.substring(indexOfEqual + 1);
-                        hasOwnProperty = this.parameters.hasOwnProperty(key);
+                        indexOfEqual = item.indexOf('=');
 
-                        if (multipleAsArray && hasOwnProperty) {
+                        if (indexOfEqual > 0) {
 
-                            // Make the value an array
-                            if (typeof this.parameters[key] === 'string')
-                                this.parameters[key] = [this.parameters[key]];
+                            key = item.substring(0, indexOfEqual);
+                            value = item.substring(indexOfEqual + 1);
+                            hasOwnProperty = this.parameters.hasOwnProperty(key);
 
-                            this.parameters[key].push(value);
+                            if (multipleAsArray && hasOwnProperty) {
 
-                        } else if (!hasOwnProperty)
-                            this.parameters[key] = value;
+                                // Make the value an array
+                                if (typeof this.parameters[key] === 'string')
+                                    this.parameters[key] = [this.parameters[key]];
 
-                        this.size++;
+                                this.parameters[key].push(value);
+
+                            } else if (!hasOwnProperty)
+                                this.parameters[key] = value;
+
+                            this.size++;
+                        }
                     }
                 }
-
             }
         };
 
